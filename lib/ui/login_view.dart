@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:gomasjid/cons/constant.dart';
+import 'package:gomasjid/ui/forgotpassword_view.dart';
+import 'package:gomasjid/ui/registration_view.dart';
 import 'package:gomasjid/ui/splash_login.dart';
 
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: <Widget>[
-            _titleDescription(),
-            _textField(),
-            _textForgetPassword(),
-            _buttonLogin(context),
-            _textRegistration(),
-          ],
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: <Widget>[
+              _titleDescription(),
+              _textField(),
+              _textForgetPassword(context),
+              _buttonLogin(context),
+              _textRegistration(context),
+            ],
+          ),
         ),
       ),
     );
@@ -83,11 +87,13 @@ Widget _textField() {
   );
 }
 
-Widget _textForgetPassword() {
+Widget _textForgetPassword(BuildContext context) {
   return Container(
     alignment: Alignment.centerRight,
     child: FlatButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ForgotPasswordPage()));
+        },
         child: Text(
           'Lupa Password',
           style: TextStyle(fontSize: 18),
@@ -117,7 +123,7 @@ Widget _buttonLogin(BuildContext context) {
   );
 }
 
-Widget _textRegistration() {
+Widget _textRegistration(BuildContext context) {
   return Container(
     child: Row(
       children: <Widget>[
@@ -128,9 +134,15 @@ Widget _textRegistration() {
                 alignment: Alignment.center,
                 child: Text('belum memiliki akun? '),
               ),
-              Align(
-                alignment: Alignment.center,
-                child: Text('Daftar'),
+              Center(
+                child: InkWell(
+                  child: FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => RegistrationPage()));
+                      },
+                      child: Text('Daftar')),
+                ),
               )
             ],
           ),

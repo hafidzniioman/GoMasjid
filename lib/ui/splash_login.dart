@@ -1,19 +1,43 @@
+import 'dart:async';
+import 'package:gomasjid/ui/landing_page.dart';
 import 'package:flutter/material.dart';
 
-class SplashLogin extends StatelessWidget {
+class SplashLogin extends StatefulWidget {
+  @override
+  _SplashLoginState createState() => _SplashLoginState();
+}
+
+class _SplashLoginState extends State<SplashLogin> {
+  _startSplashScreen() async {
+    var duration = Duration(seconds: 2);
+    return Timer(duration, () {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) => LandingPage()));
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _startSplashScreen();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFF4FC9F2),
       appBar: AppBar(
         leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
           Navigator.pop(context);
-        },),
+        }),
       ),
+      backgroundColor: Colors.white,
       body: Center(
-        child: Container(
-          child: Text('Splash Login GO Masjid'),
-        ),
+        child: Column(children:<Widget>[
+          Text('Selamat Datang'),
+          Text('di'),
+          Text('GO MASJID')
+        ]),
       ),
     );
   }
