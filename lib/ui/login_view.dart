@@ -3,6 +3,7 @@ import 'package:gomasjid/cons/constant.dart';
 import 'package:gomasjid/ui/forgotpassword_view.dart';
 import 'package:gomasjid/ui/registration_view.dart';
 import 'package:gomasjid/ui/splash_login.dart';
+import 'package:bloc/bloc.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -29,20 +30,26 @@ class LoginPage extends StatelessWidget {
 Widget _titleDescription() {
   return Container(
     alignment: Alignment.centerLeft,
-    padding: EdgeInsets.only(left: 20, top: 20),
+    padding: EdgeInsets.only(left: 0, top: 20),
     child: Column(
       children: <Widget>[
         Padding(
           padding: EdgeInsets.only(top: 32),
         ),
-        Text(
-          'Assalamu\'alaikum',
-          style: TextStyle(fontSize: 32),
-          textAlign: TextAlign.left,
+        Container(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Assalamu\'alaikum',
+            style: TextStyle(fontSize: 32),
+            textAlign: TextAlign.left,
+          ),
         ),
-        Text(
-          'Silahkan masuk untuk melanjutkan',
-          textAlign: TextAlign.left,
+        Container(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Silahkan masuk untuk melanjutkan',
+            textAlign: TextAlign.left,
+          ),
         ),
         Padding(padding: EdgeInsets.only(top: 25)),
       ],
@@ -54,17 +61,19 @@ Widget _textField() {
   return Column(
     children: <Widget>[
       Padding(padding: EdgeInsets.only(top: 32)),
-      TextFormField(
-        decoration: InputDecoration(
-            border: UnderlineInputBorder(),
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-              color: ColorPalette.underLineTexField,
-              width: 1.5,
-            )),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 3.0)),
-            hintText: 'Username/No. HP'),
+      Container(
+        child: TextFormField(
+          decoration: InputDecoration(
+              border: UnderlineInputBorder(),
+              enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                color: ColorPalette.underLineTexField,
+                width: 1.5,
+              )),
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white, width: 3.0)),
+              hintText: 'Username/No. HP'),
+        ),
       ),
       Padding(padding: EdgeInsets.only(top: 30)),
       TextFormField(
@@ -92,7 +101,8 @@ Widget _textForgetPassword(BuildContext context) {
     alignment: Alignment.centerRight,
     child: FlatButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ForgotPasswordPage()));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => ForgotPasswordPage()));
         },
         child: Text(
           'Lupa Password',
@@ -102,52 +112,45 @@ Widget _textForgetPassword(BuildContext context) {
 }
 
 Widget _buttonLogin(BuildContext context) {
-  return InkWell(
-    child: Container(
-      child: Center(
-        child: FlatButton(
-          onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => SplashLogin()));
-          },
-          child: Text(
-            'LOGIN',
-            style: TextStyle(fontSize: 24, color: Colors.white),
-            textAlign: TextAlign.center,
-          ),
+  return Padding(
+    padding: EdgeInsets.symmetric(vertical: 16),
+    child: Material(
+      color: Colors.lightBlueAccent,
+      borderRadius: BorderRadius.all(Radius.circular(30)),
+      elevation: 5,
+      child: MaterialButton(
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => SplashLogin()));
+        },
+        minWidth: 200,
+        height: 42,
+        child: Text(
+          'Masuk',
+          style: TextStyle(fontSize: 24, color: Colors.white),
         ),
       ),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20), color: Color(0XFF4FC9F2)),
     ),
   );
 }
 
 Widget _textRegistration(BuildContext context) {
-  return Container(
-    child: Row(
-      children: <Widget>[
-        Center(
-          child: Row(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.center,
-                child: Text('belum memiliki akun? '),
-              ),
-              Center(
-                child: InkWell(
-                  child: FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => RegistrationPage()));
-                      },
-                      child: Text('Daftar')),
-                ),
-              )
-            ],
-          ),
-        )
-      ],
-    ),
-  );
+  return Center(
+      child: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Text('Belum memiliki akun? '),
+      InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => RegistrationPage()));
+        },
+        child: Text(
+          'Daftar',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      )
+    ],
+  ));
 }
+
