@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gomasjid/cons/constant.dart';
-import 'package:gomasjid/ui/login_view.dart';
+import 'package:gomasjid/ui/forgot/otp_view.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   @override
@@ -86,7 +86,7 @@ Widget _buttonSend(BuildContext context){
       child: MaterialButton(
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => LoginPage()));
+              .push(MaterialPageRoute(builder: (context) => OtpPage()));
         },
         minWidth: 200,
         height: 42,

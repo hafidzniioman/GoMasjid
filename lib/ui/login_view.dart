@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gomasjid/cons/constant.dart';
-import 'package:gomasjid/ui/forgotpassword_view.dart';
+import 'package:gomasjid/ui/forgot/forgotpassword_view.dart';
 import 'package:gomasjid/ui/registration_view.dart';
-import 'package:gomasjid/ui/splash_login.dart';
+import 'package:gomasjid/ui/splash/splash_login.dart';
 import 'package:bloc/bloc.dart';
 
 class LoginPage extends StatelessWidget {
@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.only(top: 80, left: 32, right: 32, bottom: 32),
           child: Column(
             children: <Widget>[
               _titleDescription(),
