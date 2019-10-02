@@ -3,26 +3,30 @@ import 'package:gomasjid/cons/constant.dart';
 import 'package:gomasjid/ui/forgot/forgotpassword_view.dart';
 import 'package:gomasjid/ui/registration_view.dart';
 import 'package:gomasjid/ui/splash/splash_login.dart';
-import 'package:bloc/bloc.dart';
+import 'package:gomasjid/ui/wavyheader.dart';
+
 
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.only(top: 80, left: 32, right: 32, bottom: 32),
-          child: Column(
-            children: <Widget>[
-              _titleDescription(),
-              _textField(),
-              _textForgetPassword(context),
-              _buttonLogin(context),
-              _textRegistration(context),
-            ],
+      body: Stack(children: <Widget>[
+        WavyHeader(),
+        SafeArea(
+          child: Container(
+            padding: EdgeInsets.only(top: 80, left: 32, right: 32, bottom: 32),
+            child: Column(
+              children: <Widget>[
+                _titleDescription(),
+                _textField(),
+                _textForgetPassword(context),
+                _buttonLogin(context),
+                _textRegistration(context),
+              ],
+            ),
           ),
         ),
-      ),
+      ]),
     );
   }
 }
@@ -153,4 +157,3 @@ Widget _textRegistration(BuildContext context) {
     ],
   ));
 }
-
