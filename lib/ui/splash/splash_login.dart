@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:gomasjid/ui/landing_page.dart';
+import 'package:gomasjid/ui/home/landing_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashLogin extends StatefulWidget {

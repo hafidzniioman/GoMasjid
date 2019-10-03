@@ -1,4 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:gomasjid/ui/registration/login_view.dart';
+import 'package:gomasjid/ui/registration/registration_view.dart';
 
 const List<Color> orangeGradients = [
   Color(0xFFFD7267),
@@ -6,22 +9,62 @@ const List<Color> orangeGradients = [
   Color(0xFF5DBCD2),
 ];
 
+List screens = [
+  LoginPage(),
+  RegistrationPage(),
+];
 class WavyHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: TopWaveClipper(),
-      child: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-          colors: orangeGradients,
-          begin: Alignment.topLeft,
-          end: Alignment.center,
-        )),
-        height: MediaQuery.of(context).size.height / 2.5,
-      ),
-    );
+    return Stack(children: <Widget>[
+      _buildClip(context),
+      _arrowBack(context),
+    ]);
   }
+}
+
+class WavyHeaderLogin extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(children: <Widget>[
+      _buildClip(context),
+    ]);
+  }
+}
+
+Widget _arrowBack(BuildContext context) {
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 48),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+            color: Colors.black,
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+Widget _buildClip(BuildContext context) {
+  return ClipPath(
+    clipper: TopWaveClipper(),
+    child: Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+        colors: orangeGradients,
+        begin: Alignment.topLeft,
+        end: Alignment.center,
+      )),
+      height: MediaQuery.of(context).size.height / 2.5,
+    ),
+  );
 }
 
 class TopWaveClipper extends CustomClipper<Path> {

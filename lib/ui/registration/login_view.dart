@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gomasjid/cons/constant.dart';
 import 'package:gomasjid/ui/forgot/forgotpassword_view.dart';
-import 'package:gomasjid/ui/registration_view.dart';
+import 'package:gomasjid/ui/registration/registration_view.dart';
 import 'package:gomasjid/ui/splash/splash_login.dart';
 import 'package:gomasjid/ui/wavyheader.dart';
 
@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: <Widget>[
-        WavyHeader(),
+        WavyHeaderLogin(),
         SafeArea(
           child: Container(
             padding: EdgeInsets.only(top: 80, left: 32, right: 32, bottom: 32),

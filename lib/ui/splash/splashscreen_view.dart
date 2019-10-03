@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:gomasjid/ui/login_view.dart';
+import 'package:gomasjid/ui/registration/login_view.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override
