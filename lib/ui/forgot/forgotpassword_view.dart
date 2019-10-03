@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:gomasjid/cons/constant.dart';
 import 'package:gomasjid/ui/forgot/otp_view.dart';
@@ -11,12 +13,10 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
-
     return Scaffold(
         body: Stack(children: <Widget>[
       WavyHeader(),
-      _arrowBack(mediaQuery),
+      _arrowBack(context),
       Container(
         padding: EdgeInsets.fromLTRB(20, 120, 20, 32),
         child: Column(
@@ -33,13 +33,19 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 }
 
-Widget _arrowBack(MediaQueryData mediaQueryData) {
+Widget _arrowBack(BuildContext context) {
   return Padding(
-    padding: EdgeInsets.only(
-        left: 16, top: mediaQueryData.padding.top + 16, right: 16),
+    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 48),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[Icon(Icons.arrow_back)],
+      children: <Widget>[
+        GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Icon(Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
+        )
+      ],
     ),
   );
 }
@@ -50,7 +56,7 @@ Widget _textLupaPassword() {
       padding: EdgeInsets.only(top: 60),
       child: Text(
         'Lupa Password',
-        style: TextStyle(fontSize: 32, color: Colors.black54),
+        style: TextStyle(fontSize: 32, color: Colors.black, fontWeight: FontWeight.bold),
       ));
 }
 
