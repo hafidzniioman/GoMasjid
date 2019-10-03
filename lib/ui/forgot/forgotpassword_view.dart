@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gomasjid/cons/constant.dart';
 import 'package:gomasjid/ui/forgot/otp_view.dart';
+import 'package:gomasjid/ui/wavyheader.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   @override
@@ -10,34 +11,40 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
+        body: Stack(children: <Widget>[
+      WavyHeader(),
+      _arrowBack(mediaQuery),
+      Container(
+        padding: EdgeInsets.fromLTRB(20, 120, 20, 32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            _textLupaPassword(),
+            _textInformation(),
+            _textInputPassword(),
+            _buttonSend(context),
+          ],
         ),
-        body: Container(
-          padding: EdgeInsets.fromLTRB(20, 60, 20, 32),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              _textLupaPassword(),
-              _textInformation(),
-              _textInputPassword(),
-              _buttonSend(context),
-            ],
-          ),
-        ));
+      ),
+    ]));
   }
 }
 
-Widget _textLupaPassword(){
+Widget _arrowBack(MediaQueryData mediaQueryData) {
+  return Padding(
+    padding: EdgeInsets.only(
+        left: 16, top: mediaQueryData.padding.top + 16, right: 16),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[Icon(Icons.arrow_back)],
+    ),
+  );
+}
+
+Widget _textLupaPassword() {
   return Container(
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.only(top: 60),
@@ -47,7 +54,7 @@ Widget _textLupaPassword(){
       ));
 }
 
-Widget _textInformation(){
+Widget _textInformation() {
   return Padding(
     padding: const EdgeInsets.only(bottom: 24.0),
     child: Text(
@@ -57,7 +64,7 @@ Widget _textInformation(){
   );
 }
 
-Widget _textInputPassword(){
+Widget _textInputPassword() {
   return Container(
     padding: EdgeInsets.only(bottom: 16),
     child: TextFormField(
@@ -65,18 +72,18 @@ Widget _textInputPassword(){
           border: UnderlineInputBorder(),
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
-                color: ColorPalette.underLineTexField,
-                width: 1.5,
-              )),
+            color: ColorPalette.underLineTexField,
+            width: 1.5,
+          )),
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.white, width: 3),
           ),
-          hintText: 'Masukkan Password Baru'),
+          hintText: 'Masukkan No Handphone'),
     ),
   );
 }
 
-Widget _buttonSend(BuildContext context){
+Widget _buttonSend(BuildContext context) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: 16),
     child: Material(

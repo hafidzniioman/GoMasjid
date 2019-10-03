@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 const List<Color> orangeGradients = [
-  Color(0xFF5DBCD2),
-  Color(0xFFFE8853),
   Color(0xFFFD7267),
+  Color(0xFF5DBBDD),
+  Color(0xFF5DBCD2),
 ];
 
 class WavyHeader extends StatelessWidget {
