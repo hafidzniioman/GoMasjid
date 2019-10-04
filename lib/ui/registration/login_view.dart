@@ -110,7 +110,7 @@ Widget _textForgetPassword(BuildContext context) {
         },
         child: Text(
           'Lupa Password',
-          style: TextStyle(fontSize: 18),
+          style: TextStyle(fontSize: 18, color: Colors.lightBlueAccent),
         )),
   );
 }
@@ -151,7 +151,7 @@ Widget _textRegistration(BuildContext context) {
         },
         child: Text(
           'Daftar',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
         ),
       )
     ],
