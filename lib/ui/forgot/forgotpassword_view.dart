@@ -33,7 +33,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
 Widget _textInformation() {
   return Padding(
-    padding: const EdgeInsets.only(bottom: 24.0),
+    padding: const EdgeInsets.only(bottom: 24.0, left: 2),
     child: Text(
       'Silahkan masukkan Nomor Handpone anda, kode OTP akan digunakan untuk mengubah password',
       style: TextStyle(color: Colors.black38),
