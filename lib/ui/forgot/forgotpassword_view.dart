@@ -20,7 +20,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            _textLupaPassword(),
+            TextLupaPassword(),
             _textInformation(),
             _textInputPassword(),
             _buttonSend(context),
@@ -29,17 +29,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       ),
     ]));
   }
-}
-
-Widget _textLupaPassword() {
-  return Container(
-      alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(top: 60),
-      child: Text(
-        'Lupa Password',
-        style: TextStyle(
-            fontSize: 32, color: Colors.black, fontWeight: FontWeight.bold),
-      ));
 }
 
 Widget _textInformation() {
