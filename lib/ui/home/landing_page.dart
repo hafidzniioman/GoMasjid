@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:gomasjid/ui/wavyheader.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
+  @override
+  _LandingPageState createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: <Widget>[
           WavyHeaderLogin(),
-          Container(
-            child: Center(
-              child: Text(
-                'Home Page'
-              ),
-            ),
-          )
+Text('Landing Page')
+
         ],
       ),
     );
   }
 }
+
+
