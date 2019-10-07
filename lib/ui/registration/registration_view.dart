@@ -22,19 +22,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
     super.initState();
   }
 
-List<DropdownMenuItem<Warga>> buildDropDownMenuItems(List wargas){
-  List<DropdownMenuItem<Warga>> items = List();
-  for(Warga warga in wargas){
-    items.add(DropdownMenuItem(value: warga, child: Text(warga.nama)));
+  List<DropdownMenuItem<Warga>> buildDropDownMenuItems(List wargas) {
+    List<DropdownMenuItem<Warga>> items = List();
+    for (Warga warga in wargas) {
+      items.add(DropdownMenuItem(value: warga, child: Text(warga.nama)));
+    }
+    return items;
   }
-  return items;
-}
 
-onChangeDropDownItem(Warga selectedWarga){
-  setState(() {
-    _selectedWarga = selectedWarga;
-  });
-}
+  onChangeDropDownItem(Warga selectedWarga) {
+    setState(() {
+      _selectedWarga = selectedWarga;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,10 +49,26 @@ onChangeDropDownItem(Warga selectedWarga){
                 _textAssalamualaikum(),
                 _username(),
                 _dateLahir(),
-                // TODO masukkan dropdown ke warga ini 
-                _warga(context),
+                // TODO masukkan dropdown ke warga ini
+                Row(
+                
+                  children: <Widget>[
+                    // _warga(context),
+                    Expanded(
+                    
+                      child: _warga(context),
+                    ),
+                    DropdownButton(
+                      value: _selectedWarga,
+                      items: _dropDownMenuItems,
+                      onChanged: onChangeDropDownItem,
+                    ),
+                  ],
+                ),
+
                 _alamat(),
                 _buttonSend(context),
+                _textRegistration(context),
               ],
             ),
           ),
@@ -240,4 +257,25 @@ Widget _buttonSend(BuildContext context) {
       ),
     ),
   );
+}
+
+Widget _textRegistration(BuildContext context) {
+  return Center(
+      child: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Text('Sudah memiliki akun? '),
+      InkWell(
+        onTap: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => LoginPage()));
+        },
+        child: Text(
+          'Masuk',
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
+        ),
+      )
+    ],
+  ));
 }
