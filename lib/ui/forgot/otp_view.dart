@@ -30,12 +30,36 @@ class _OtpPageState extends State<OtpPage> {
               TextLupaPassword(),
               _textInformation(),
               _buildOtpBox(),
+              _buttonSend(context)
             ],
           ),
         ),
       ]),
     );
   }
+
+  Widget _buttonSend(BuildContext context) {
+  return Padding(
+    padding: EdgeInsets.symmetric(vertical: 16),
+    child: Material(
+      color: Colors.lightBlueAccent,
+      borderRadius: BorderRadius.all(Radius.circular(30)),
+      elevation: 5,
+      child: MaterialButton(
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => InputNewPasswordPage()));
+        },
+        minWidth: 200,
+        height: 42,
+        child: Text(
+          'Kirim',
+          style: TextStyle(fontSize: 24, color: Colors.white),
+        ),
+      ),
+    ),
+  );
+}
 
   Widget _buildOtpBox() {
     return Container(
@@ -63,9 +87,6 @@ class _OtpPageState extends State<OtpPage> {
                   hasError = false;
                 });
               },
-              onDone: (text) {
-                print("DONE $text");
-              },
               pinCodeTextFieldLayoutType:
                   PinCodeTextFieldLayoutType.AUTO_ADJUST_WIDTH,
               wrapAlignment: WrapAlignment.start,
@@ -76,25 +97,6 @@ class _OtpPageState extends State<OtpPage> {
                   ProvidedPinBoxTextAnimation.scalingTransition,
               pinTextAnimatedSwitcherDuration: Duration(milliseconds: 300),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 32.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  MaterialButton(
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    child: Text("Kirim"),
-                    onPressed: () {
-                      setState(() {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => InputNewPasswordPage()));
-                      });
-                    },
-                  ),
-                ],
-              ),
-            )
           ],
         ),
       ),
@@ -103,15 +105,23 @@ class _OtpPageState extends State<OtpPage> {
 }
 
 Widget _textInformation() {
-  return Container(
-    alignment: Alignment.centerLeft,
-    child: Padding(
-      padding: const EdgeInsets.only(bottom: 24.0, left: 3),
-      child: Text(
-        'Harap Masukkan Kode OTP',
-        style: TextStyle(color: Colors.black38),
-
+  return Column(
+      children: <Widget>[Container(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 24.0, left: 3),
+        child: Text(
+          'Harap Masukkan Kode OTP',
+          style: TextStyle(color: Colors.black38),
+        ),
       ),
     ),
+    Container(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: EdgeInsets.only(top: 32),
+        child: Text('Kode OTP', style: TextStyle(fontSize: 24),),),
+    )
+    ]
   );
 }
