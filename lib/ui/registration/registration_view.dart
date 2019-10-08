@@ -12,9 +12,13 @@ class RegistrationPage extends StatefulWidget {
 class _RegistrationPageState extends State<RegistrationPage> {
   // TODO membuat dropdown
   String nameCity = '';
+  String kota = '';
 
   var _penduduk = ['Kota Wisata', 'Cibubur', 'Cileungsi', 'Other'];
   var _currentSelectedItems = 'Kota Wisata';
+
+  var _jenisManusia = ['Laki-laki', 'Perempuan'];
+  var _currentSelected = 'Laki-laki';
 
   @override
   void initState() {
@@ -36,6 +40,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 _dateLahir(),
                 // TODO masukkan dropdown ke warga ini
                 _warga(context),
+                _jenisKelamin(context),
                 _alamat(),
                 _buttonSend(context),
                 _textRegistration(context),
@@ -151,108 +156,162 @@ class _RegistrationPageState extends State<RegistrationPage> {
             textAlign: TextAlign.left,
           ),
         ),
-        TextField(
-          onSubmitted: (String userInput) {
-            setState(() {
-              _currentSelectedItems = userInput;
-            });
-          },
-        ),
-        DropdownButton<String>(
-          items: _penduduk.map((String dropdDownStringItem) {
-            return DropdownMenuItem<String>(
-                value: dropdDownStringItem, child: Text(dropdDownStringItem));
-          }).toList(),
-          onChanged: (String newValueSelected) {
-            _onDropDownItemSelected(newValueSelected);
-          },
-          value: _currentSelectedItems,
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: TextField(
+                onSubmitted: (String userInput) {
+                  setState(() {
+                    _currentSelectedItems = userInput;
+                  });
+                },
+              ),
+            ),
+            DropdownButton<String>(
+              items: _penduduk.map((String dropdDownStringItem) {
+                return DropdownMenuItem<String>(
+                    value: dropdDownStringItem,
+                    child: Text(dropdDownStringItem));
+              }).toList(),
+              onChanged: (String newValueSelected) {
+                _onDropDownItemSelected(newValueSelected);
+              },
+              value: _currentSelectedItems,
+            ),
+          ],
         ),
       ]),
     );
   }
 
   void _onDropDownItemSelected(String newValueSelected) {
-	  setState(() {
-		  this._currentSelectedItems = newValueSelected;
-	  });
+    setState(() {
+      this._currentSelectedItems = newValueSelected;
+    });
   }
-}
 
-  Widget _alamat() {
+  Widget _jenisKelamin(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(bottom: 32),
       child: Column(children: <Widget>[
         Container(
           alignment: Alignment.centerLeft,
           child: Text(
-            'Alamat',
+            'Jenis Kelamin',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             textAlign: TextAlign.left,
           ),
         ),
-        TextFormField(
-          autofocus: false,
-          enabled: true,
-          keyboardType: TextInputType.number,
-          textInputAction: TextInputAction.done,
-          decoration: InputDecoration(
-              border: UnderlineInputBorder(),
-              enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                color: ColorPalette.underLineTexField,
-                width: 1.5,
-              )),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 3),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: TextField(
+                onSubmitted: (String inputUser) {
+                  setState(() {
+                    _currentSelected = inputUser;
+                  });
+                },
               ),
-              hintText: 'Masukkan Alamat anda'),
+            ),
+            DropdownButton<String>(
+              items: _jenisManusia.map((String dropdDownStringItem) {
+                return DropdownMenuItem<String>(
+                    value: dropdDownStringItem,
+                    child: Text(dropdDownStringItem));
+              }).toList(),
+              onChanged: (String newValueSelected) {
+                _onDropSelect(newValueSelected);
+              },
+              value: _currentSelected,
+            ),
+          ],
         ),
       ]),
     );
   }
 
-  Widget _buttonSend(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16),
-      child: Material(
-        color: Colors.lightBlueAccent,
-        borderRadius: BorderRadius.all(Radius.circular(30)),
-        elevation: 5,
-        child: MaterialButton(
-          onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => LoginPage()));
-          },
-          minWidth: 200,
-          height: 42,
-          child: Text(
-            'Kirim',
-            style: TextStyle(fontSize: 24, color: Colors.white),
-          ),
+  void _onDropSelect(String newValueSelected) {
+    setState(() {
+      this._currentSelected = newValueSelected;
+    });
+  }
+}
+
+
+
+Widget _alamat() {
+  return Container(
+    padding: EdgeInsets.only(bottom: 32),
+    child: Column(children: <Widget>[
+      Container(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          'Alamat',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.left,
         ),
       ),
-    );
-  }
+      TextFormField(
+        autofocus: false,
+        enabled: true,
+        keyboardType: TextInputType.number,
+        textInputAction: TextInputAction.done,
+        decoration: InputDecoration(
+            border: UnderlineInputBorder(),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+              color: ColorPalette.underLineTexField,
+              width: 1.5,
+            )),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white, width: 3),
+            ),
+            hintText: 'Masukkan Alamat anda'),
+      ),
+    ]),
+  );
+}
 
-  Widget _textRegistration(BuildContext context) {
-    return Center(
-        child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text('Sudah memiliki akun? '),
-        InkWell(
-          onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => LoginPage()));
-          },
-          child: Text(
-            'Masuk',
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
-          ),
-        )
-      ],
-    ));
-  }
+Widget _buttonSend(BuildContext context) {
+  return Padding(
+    padding: EdgeInsets.symmetric(vertical: 16),
+    child: Material(
+      color: Colors.lightBlueAccent,
+      borderRadius: BorderRadius.all(Radius.circular(30)),
+      elevation: 5,
+      child: MaterialButton(
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => LoginPage()));
+        },
+        minWidth: 200,
+        height: 42,
+        child: Text(
+          'Kirim',
+          style: TextStyle(fontSize: 24, color: Colors.white),
+        ),
+      ),
+    ),
+  );
+}
 
+Widget _textRegistration(BuildContext context) {
+  return Center(
+      child: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Text('Sudah memiliki akun? '),
+      InkWell(
+        onTap: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => LoginPage()));
+        },
+        child: Text(
+          'Masuk',
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
+        ),
+      )
+    ],
+  ));
+}
