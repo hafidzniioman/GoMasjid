@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gomasjid/cons/constant.dart';
 import 'package:gomasjid/ui/registration/login_view.dart';
+import 'package:gomasjid/ui/splash/splash_forgot.dart';
 import 'package:gomasjid/ui/wavyheader.dart';
 
 class InputNewPasswordPage extends StatefulWidget {
@@ -130,7 +131,7 @@ Widget _buttonSend(BuildContext context) {
       child: MaterialButton(
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => LoginPage()));
+              .push(MaterialPageRoute(builder: (context) => SplashForgot()));
         },
         minWidth: 200,
         height: 42,
